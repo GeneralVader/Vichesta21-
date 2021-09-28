@@ -5,6 +5,7 @@ NavfnROS:
   allow_unknown: true # Specifies whether or not to allow navfn to create plans that traverse unknown space.
   default_tolerance: 0.1 # A tolerance on the goal point for the planner.
 
+
 # TrajectoryPlannerROS:
 #   # Robot Configuration Parameters
 #   acc_lim_x: 2.5
@@ -173,3 +174,4 @@ TebLocalPlannerROS:
   obstacle_keypoint_offset: 0.1
   obstacle_heading_threshold: 0.45
   visualize_hc_graph: False
+=======
