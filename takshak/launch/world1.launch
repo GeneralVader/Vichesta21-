@@ -41,5 +41,7 @@
 
   <!-- Spawn aruco markers -->
   <node pkg="takshak" name="spawn_marker" type="spawn_marker.py" />
+  
+  <include file="$(find protobot_navigation)/launch/gmapping_demo.launch" />
 
 </launch>
