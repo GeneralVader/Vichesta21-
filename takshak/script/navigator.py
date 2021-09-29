@@ -31,12 +31,13 @@ def goal_point(pos,ori):
 
 def main(args):
     rospy.init_node("navigator")
-    rospy.set_param('goal_point',[[-10,-4,0],[0,0,0.6051864,0.7960838]])
-
-
     point= rospy.get_param('goal_point')
-    goal_point(point[0],point[1])
-    print(point)
+    while True:
+        goal_point(point[0],point[1])
+        if point != rospy.get_param('goal_point'):
+            point=rospy.get_param('goal_point')
+        rospy.sleep(0.005)
+
     try:
         rospy.spin()
     except KeyboardInterrupt:

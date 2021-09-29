@@ -37,11 +37,14 @@
   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" />
 
   <!-- Rviz -->
-  <node name="rviz" pkg="rviz" type="rviz" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find takshak)/viz/rviz.rviz" output="screen"/>
 
   <!-- Spawn aruco markers -->
   <node pkg="takshak" name="spawn_marker" type="spawn_marker.py" />
   
   <include file="$(find protobot_navigation)/launch/gmapping_demo.launch" />
-
+  <node pkg="takshak" name="controller" type="controller.py" />
+  <node pkg="takshak" name="navigator" type="navigator.py" />
+  <node pkg="takshak" name="aruco_detector" type="aruco_detector.py" />
+  
 </launch>

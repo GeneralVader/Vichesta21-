@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python
 
 import rospy
 import cv2
@@ -53,19 +53,20 @@ class image_converter:
                     r = int(img[y-35,x,2])
                     rospy.set_param('aruco_id_'+str(ids[i][0]),{'r': r, 'g': g, 'b': b})
                     rospy.set_param('aruco',1)
-            cv2.imshow("win", img)
-            cv2.waitKey(3)
+            #cv2.imshow("win", img)
+            #cv2.waitKey(3)
         print('\n\nposition = ' + str([x_cord,y_cord]) + '\n\norientation = ' + str([roll,pitch,yaw]))
 
 
 def main(args):
+    
     ic = image_converter()
     rospy.init_node("image_converter", anonymous=True)
     try:
         rospy.spin()
-    except KeyboardInterrupt:
+    except KeyboardInterrupt or rospy.get_param('aruco')==1:
         print("shutting down")
-    cv2.destroyAllWindows()
+    #cv2.destroyAllWindows()
 
 if __name__ == '__main__':
     main(sys.argv)
