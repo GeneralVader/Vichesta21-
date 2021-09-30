@@ -1,5 +1,0 @@
-
-<launch>
-  <node name="image_converter" pkg="visual" type="img_show.py" output="screen" />
-  <node name="door_detector" pkg="visual" type="door_detection.py" output="screen" />
-</launch>
