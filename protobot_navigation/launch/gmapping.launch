@@ -43,7 +43,7 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 
       # Update frequencies
       linearUpdate: 0.3
-      angularUpdate: 0.5
+      angularUpdate: 0.3
       temporalUpdate: 2.0
       resampleThreshold: 0.5
 

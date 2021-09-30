@@ -55,7 +55,7 @@ def main(args):
     path= os.path.abspath("map.pgm")
     print(path)
     mapp=subprocess.Popen(["rosrun", "map_server", "map_saver"])
-    rospy.sleep(0.3)
+    rospy.sleep(2)
     mapp.kill()
     rospy.sleep(0.2)
 

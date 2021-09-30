@@ -24,7 +24,7 @@ class door_detection:
         try:
             depth_img = self.bridge.imgmsg_to_cv2(depth_data,"passthrough")
             color_img = self.bridge.imgmsg_to_cv2(img_data,"bgr8")
-            color_img = cv2.cvtColor(color_img, cv2.COLOR_BGR2RGB)
+            #color_img = cv2.cvtColor(color_img, cv2.COLOR_BGR2RGB)
         except CvBridgeError as e:
             print(e)
         point = odom_data.pose.pose.position
@@ -53,9 +53,10 @@ class door_detection:
         #cv2.waitKey(3)
 
     def segment(self,color_img,red,green,blue):
-        low = np.array([red-20,green-20,blue-20])
-        high = np.array([red+20,green+20,blue+20])
+        low = np.array([blue-20,green-20,red-20])
+        high = np.array([blue+20,green+20,red+20])
         mask = cv2.inRange(color_img,low,high)
+
         #print(low,high)
         #for i in range(50):
         #    print(1)
@@ -91,13 +92,13 @@ class door_detection:
         X = Z*(cx1 - 320.5)/320.255
         Y = Z*(cy1 - 240.5)/320.255
         now = rospy.Time.now()
-        self.listener.waitForTransform('camera_depth_frame','odom',now,rospy.Duration(4.0))
+        self.listener.waitForTransform('camera_depth_frame','map',now,rospy.Duration(4.0))
         msg = PointStamped()
         msg.header.frame_id = "camera_depth_frame"
         msg.point.x = X
         msg.point.y = Y
         msg.point.z = Z
-        ret_msg = self.listener.transformPoint('odom', msg)
+        ret_msg = self.listener.transformPoint('map', msg)
         #(trans, rot) = self.listener.lookupTransform('camera_depth_frame','odom',now)
         #print(X,Y,Z)
         #print(ret_msg)
