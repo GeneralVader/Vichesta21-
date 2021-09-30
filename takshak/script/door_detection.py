@@ -33,7 +33,7 @@ class door_detection:
         orient = odom_data.pose.pose.orientation
         (roll,pitch,yaw) = tf.transformations.euler_from_quaternion([orient.x,orient.y,orient.z,orient.w])
 
-        if (y > -1.25) and (y < -0.7) and (x > 0.5) and (x < 2) and (yaw > 0.1) and (yaw < 0.3):
+        if (y > -1.3) and (y < -0.6) and (x > 0.5) and (x < 2): #and (yaw > 0.12) and (yaw < 0.33):
             print('detecting')
             for i in range(5):
                 colors = rospy.get_param('aruco_id_' + str(i))

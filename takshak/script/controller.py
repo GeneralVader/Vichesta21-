@@ -34,7 +34,7 @@ def main(args):
     while rospy.get_param('aruco') == 0:
         rospy.sleep(0.005)
     #aruco.kill()
-    rospy.set_param('goal_point',[[1.5,-0.9,0],[ 0, 0, 0.0998334, 0.9950042 ]])
+    rospy.set_param('goal_point',[[1.4221,-1,0],[ 0, 0, 0.122839, 0.9924266 ]])
     
     
     rospy.set_param('doors',0)

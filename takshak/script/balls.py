@@ -64,9 +64,9 @@ def main(args):
     rospy.set_param('gate_open',1)
     #print(list)
 
-    cv2.imshow('map',image)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    # cv2.imshow('map',image)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
     try:
         rospy.spin()
     except KeyboardInterrupt:

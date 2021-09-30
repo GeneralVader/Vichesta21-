@@ -33,7 +33,7 @@ def main(args):
 
     rospy.init_node("navigator")
 
-    rospy.set_param('goal_point',[[-9.65,-2.7,0],[0,0,0.6051864,0.7960838]])
+    rospy.set_param('goal_point',[[-9.6,-2.9,0],[0,0,0.6051864,0.7960838]])
     point= rospy.get_param('goal_point')
     goal_point(point[0],point[1])
     while True:
