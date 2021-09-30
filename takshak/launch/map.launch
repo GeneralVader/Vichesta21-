@@ -1,0 +1,4 @@
+<launch>
+<node pkg="map_server" name="saver" type="map_saver" output="screen"/>
+
+</launch>

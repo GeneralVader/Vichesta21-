@@ -32,41 +32,59 @@ class door_detection:
         y = point.y
         orient = odom_data.pose.pose.orientation
         (roll,pitch,yaw) = tf.transformations.euler_from_quaternion([orient.x,orient.y,orient.z,orient.w])
-        if (y > -1.25) and (y < -0.70) and (x > -0.1) and (x < 1.2) and (yaw > 0.1) and (yaw < 0.3):
-                print('detecting')
-                for i in range(5):
-                    colors = rospy.get_param('aruco_id_' + str(i))
-                    red, green, blue = colors['r'], colors['g'], colors['b']
-                    ((cx1,cy1),(cx2,cy2)) = self.segment(color_img,red,green,blue)
-                    (odom_x1,odom_y1,odom_z1) = self.cam_to_odom(depth_img,cx1,cy1)
-                    (odom_x2,odom_y2,odom_z2) = self.cam_to_odom(depth_img,cx2,cy2)
-                    odom_x = float((odom_x1 + odom_x2)/2)
-                    odom_y = float((odom_y1 + odom_y2)/2)
-                    odom_z = float((odom_z1 + odom_z2)/2)
-                    rospy.set_param('door_id_'+str(i), {'x': odom_x, 'y': odom_y, 'z': odom_z}) 
+
+        if (y > -1.25) and (y < -0.7) and (x > 0.5) and (x < 2) and (yaw > 0.1) and (yaw < 0.3):
+            print('detecting')
+            for i in range(5):
+                colors = rospy.get_param('aruco_id_' + str(i))
+                red, green, blue = colors['r'], colors['g'], colors['b']
+                if self.segment(color_img,red,green,blue) == False:
+                    break
+                ((cx1,cy1),(cx2,cy2)) = self.segment(color_img,red,green,blue)
+                (odom_x1,odom_y1,odom_z1) = self.cam_to_odom(depth_img,cx1,cy1)
+                (odom_x2,odom_y2,odom_z2) = self.cam_to_odom(depth_img,cx2,cy2)
+                odom_x = float((odom_x1 + odom_x2)/2)
+                odom_y = float((odom_y1 + odom_y2)/2)
+                odom_z = float((odom_z1 + odom_z2)/2)
+                rospy.set_param('door_id_'+str(i), {'x': odom_x, 'y': odom_y, 'z': odom_z}) 
+            if self.segment(color_img,red,green,blue) != False:
+                rospy.set_param('doors',1)
         #cv2.imshow('win',color_img)
         #cv2.waitKey(3)
 
     def segment(self,color_img,red,green,blue):
-        low = np.array([red-10,green-10,blue-10])
-        high = np.array([red+10,green+10,blue+10])
+        low = np.array([red-20,green-20,blue-20])
+        high = np.array([red+20,green+20,blue+20])
         mask = cv2.inRange(color_img,low,high)
+        #print(low,high)
+        #for i in range(50):
+        #    print(1)
+        # cv2.imshow('im',color_img)
+        # cv2.imshow('segment',mask)
+        # cv2.waitKey(0)
         contours, heirarchy = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[-2:]
         contours = sorted(contours, key=cv2.contourArea, reverse=True)
         centre = list()
-        for i in range(2):
-            x_sum , y_sum = 0,0
-            for cord in contours[i]:
-                x_sum += cord[0][0]
-                y_sum += cord[0][1]
-            x_sum /= contours[i].shape[0]
-            y_sum /= contours[i].shape[0]
-            #centre[0] += int(x_sum/2)
-            #centre[1] += int(y_sum/2)
-            centre.append(tuple([int(x_sum), int(y_sum)]))
-        #cv2.imshow('segment',mask)
-        #cv2.waitKey(3)
-        return tuple(centre)
+        if len(contours)>=2:
+            for i in range(2):
+                x_sum , y_sum = 0,0
+                cv2.imwrite('mask.jpg',mask)
+                cv2.imwrite('img.jpg',color_img)
+                for cord in contours[i]:
+                    x_sum += cord[0][0]
+                    y_sum += cord[0][1]
+                x_sum /= contours[i].shape[0]
+                y_sum /= contours[i].shape[0]
+                #centre[0] += int(x_sum/2)
+                #centre[1] += int(y_sum/2)
+                centre.append(tuple([int(x_sum), int(y_sum)]))
+            center = tuple(centre)
+            
+        else :
+            center = False
+        # cv2.imshow('segment',mask)
+        # cv2.waitKey(3)
+        return center
 
     def cam_to_odom(self,depth_image,cx1,cy1):
         Z = depth_image[cy1,cx1]
@@ -94,7 +112,7 @@ def main(args):
     dd = door_detection()
     try:
         rospy.spin()
-    except KeyboardInterrupt:
+    except KeyboardInterrupt or rospy.get_param('doors')==1:
         print("shutting down")
     cv2.destroyAllWindows()
 
