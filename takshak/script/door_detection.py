@@ -41,13 +41,13 @@ class door_detection:
                 if self.segment(color_img,red,green,blue) == False:
                     break
                 ((cx1,cy1),(cx2,cy2)) = self.segment(color_img,red,green,blue)
-                (odom_x1,odom_y1,odom_z1) = self.cam_to_odom(depth_img,cx1,cy1)
-                (odom_x2,odom_y2,odom_z2) = self.cam_to_odom(depth_img,cx2,cy2)
+                (odom_x1,odom_y1,odom_z1,a) = self.cam_to_odom(depth_img,cx1,cy1)
+                (odom_x2,odom_y2,odom_z2,b) = self.cam_to_odom(depth_img,cx2,cy2)
                 odom_x = float((odom_x1 + odom_x2)/2)
                 odom_y = float((odom_y1 + odom_y2)/2)
                 odom_z = float((odom_z1 + odom_z2)/2)
                 rospy.set_param('door_id_'+str(i), {'x': odom_x, 'y': odom_y, 'z': odom_z}) 
-            if self.segment(color_img,red,green,blue) != False:
+            if self.segment(color_img,red,green,blue) != False and a and b:
                 rospy.set_param('doors',1)
         #cv2.imshow('win',color_img)
         #cv2.waitKey(3)
@@ -87,7 +87,7 @@ class door_detection:
         # cv2.waitKey(3)
         return center
 
-    def cam_to_odom(self,depth_image,cx1,cy1):
+    def cam_to_odom(self,depth_image,cx1,cy1,param=True):
         Z = depth_image[cy1,cx1]
         X = Z*(cx1 - 320.5)/320.255
         Y = Z*(cy1 - 240.5)/320.255
@@ -106,7 +106,15 @@ class door_detection:
         odom_x = ret_msg.point.x
         odom_y = ret_msg.point.y
         odom_z = ret_msg.point.z
-        return (odom_x,odom_y,odom_z)
+        xx = str(odom_x)
+        xx.lower()
+        yy = str(odom_y)
+        yy.lower()
+
+        if yy.find('nan')!=-1:
+            param = False
+
+        return (odom_x,odom_y,odom_z,param)
 
 def main(args):
     rospy.init_node("door_detector", anonymous=True)

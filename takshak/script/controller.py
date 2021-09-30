@@ -45,7 +45,7 @@ def main(args):
 
 
 
-    rospy.set_param('goal_point',[[7.0,5.9,0],[ 0, 0, 0.3662725, 0.9305076 ]])
+    rospy.set_param('goal_point',[[6.5,6.5,0],[ 0, 0, 0.3662725, 0.9305076 ]])
     rospy.set_param('map_down',0)
     while rospy.get_param('map_down')==0 :
         rospy.sleep(0.1)

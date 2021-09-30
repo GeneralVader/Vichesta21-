@@ -26,11 +26,11 @@ class image_converter:
         point = odom_data.pose.pose.position
         x_cord = point.x
         y_cord = point.y
-        if  (x_cord>5.7) and(x_cord<7.1) and (y_cord<6.1) and (y_cord>4.9) : #for map making 
+        if  (x_cord>6.0) and(x_cord<7.0) and (y_cord<7.0) and (y_cord>6.0) : #for map making 
             rospy.set_param('map_down',1)
         if rospy.get_param('gate_open') == 1:
             last2 = rospy.get_param('gate')
-            if  (x_cord > (last2[0][0]-0.3)) and(x_cord<(last2[0][0]+0.3)) and (y_cord<(last2[0][1]+0.3)) and (y_cord > (last2[0][1]-0.3) ) : #for final goal
+            if  (x_cord > (last2[0][0]-0.6)) and(x_cord<(last2[0][0]+0.6)) and (y_cord<(last2[0][1]+0.6)) and (y_cord > (last2[0][1]-0.6) ) : #for final goal
                 last2[0][0]=12
                 rospy.set_param('goal_point',last2)
 
