@@ -26,8 +26,14 @@ class image_converter:
         point = odom_data.pose.pose.position
         x_cord = point.x
         y_cord = point.y
-        if  (x_cord>6.3) and(x_cord<7.1) and (y_cord<5.9) and (y_cord>5.0) :  
+        if  (x_cord>5.7) and(x_cord<7.1) and (y_cord<6.1) and (y_cord>4.9) : #for map making 
             rospy.set_param('map_down',1)
+        if rospy.get_param('gate_open') == 1:
+            last2 = rospy.get_param('gate')
+            if  (x_cord > (last2[0][0]-0.3)) and(x_cord<(last2[0][0]+0.3)) and (y_cord<(last2[0][1]+0.3)) and (y_cord > (last2[0][1]-0.3) ) : #for final goal
+                last2[0][0]=12
+                rospy.set_param('goal_point',last2)
+
         orient = odom_data.pose.pose.orientation
         (roll,pitch,yaw) = tf.transformations.euler_from_quaternion([orient.x,orient.y,orient.z,orient.w])
         if (x_cord < -9) and (x_cord > -11) and (yaw > 0.9) and (yaw < 1.8) and (y_cord < -2) and (y_cord > -5) :

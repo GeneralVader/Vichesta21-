@@ -6,6 +6,7 @@ from subprocess import Popen
 import subprocess
 from nav_msgs.msg import Odometry
 import tf
+import os
 # def callback(msg):
 #     # while True:
 #     global x,y,orient
@@ -27,6 +28,7 @@ def main(args):
 
     #rospy.set_param('goal_point',[[-9.65,-2.7,0],[0,0,0.6051864,0.7960838]])
     rospy.set_param('aruco',0)
+    rospy.set_param('gate_open',0)
     
     #aruco=subprocess.Popen(["rosrun", "takshak", "aruco_detector.py"])
     while rospy.get_param('aruco') == 0:
@@ -50,13 +52,26 @@ def main(args):
     for i in range(50):
         print(1)
     # if (x>6.3) and (y>5.0) :
+    path= os.path.abspath("map.pgm")
+    print(path)
     mapp=subprocess.Popen(["rosrun", "map_server", "map_saver"])
-    rospy.sleep(10)
+    rospy.sleep(0.3)
     mapp.kill()
-    # try:
-    #     rospy.spin()
-    # except KeyboardInterrupt:
-    #     print("shutting down")
+    rospy.sleep(0.2)
+
+    counting=subprocess.Popen(["rosrun", "takshak", "balls.py"])
+
+
+    while rospy.get_param('gate_open')==0 :
+        rospy.sleep(0.1)
+    
+    goal_1 =rospy.get_param('gate')
+    rospy.set_param('goal_point',goal_1)
+
+    try:
+        rospy.spin()
+    except KeyboardInterrupt:
+        print("shutting down")
 
 
 if __name__ == '__main__':

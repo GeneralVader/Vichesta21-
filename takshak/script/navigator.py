@@ -35,10 +35,12 @@ def main(args):
 
     rospy.set_param('goal_point',[[-9.65,-2.7,0],[0,0,0.6051864,0.7960838]])
     point= rospy.get_param('goal_point')
+    goal_point(point[0],point[1])
     while True:
-        goal_point(point[0],point[1])
+        #goal_point(point[0],point[1])
         if point != rospy.get_param('goal_point'):
             point=rospy.get_param('goal_point')
+            goal_point(point[0],point[1])
         rospy.sleep(0.01)
 
     try:
