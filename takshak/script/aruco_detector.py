@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 import rospy
 import cv2
 import sys
@@ -26,6 +25,9 @@ class image_converter:
         point = odom_data.pose.pose.position
         x_cord = point.x
         y_cord = point.y
+        # if (x_cord > -10) and (y_cord > -4.1):
+        #     rospy.set_param('goal_point',[[-9.6,-2.5,0],[0,0,0.6051864,0.7960838]])
+
         if  (x_cord>6.0) and(x_cord<7.0) and (y_cord<7.0) and (y_cord>6.0) : #for map making 
             rospy.set_param('map_down',1)
         if rospy.get_param('gate_open') == 1:
@@ -36,7 +38,7 @@ class image_converter:
 
         orient = odom_data.pose.pose.orientation
         (roll,pitch,yaw) = tf.transformations.euler_from_quaternion([orient.x,orient.y,orient.z,orient.w])
-        if (x_cord < -9) and (x_cord > -11) and (yaw > 0.9) and (yaw < 1.8) and (y_cord < -2) and (y_cord > -5) :
+        if (x_cord < -8.5) and (x_cord > -11) and (yaw > 0.8) and (yaw < 1.9) and (y_cord < -1.5) and (y_cord > -5) :
             print("detecting aruco markers")
             arucoDict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_5X5_250)
             arucoParams = cv2.aruco.DetectorParameters_create()

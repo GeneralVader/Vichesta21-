@@ -41,8 +41,8 @@ class door_detection:
                 if self.segment(color_img,red,green,blue) == False:
                     break
                 ((cx1,cy1),(cx2,cy2)) = self.segment(color_img,red,green,blue)
-                (odom_x1,odom_y1,odom_z1,a) = self.cam_to_odom(depth_img,cx1,cy1)
-                (odom_x2,odom_y2,odom_z2,b) = self.cam_to_odom(depth_img,cx2,cy2)
+                odom_x1,odom_y1,odom_z1,a = self.cam_to_odom(depth_img,cx1,cy1)
+                odom_x2,odom_y2,odom_z2,b = self.cam_to_odom(depth_img,cx2,cy2)
                 odom_x = float((odom_x1 + odom_x2)/2)
                 odom_y = float((odom_y1 + odom_y2)/2)
                 odom_z = float((odom_z1 + odom_z2)/2)
@@ -57,12 +57,6 @@ class door_detection:
         high = np.array([blue+20,green+20,red+20])
         mask = cv2.inRange(color_img,low,high)
 
-        #print(low,high)
-        #for i in range(50):
-        #    print(1)
-        # cv2.imshow('im',color_img)
-        # cv2.imshow('segment',mask)
-        # cv2.waitKey(0)
         contours, heirarchy = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[-2:]
         contours = sorted(contours, key=cv2.contourArea, reverse=True)
         centre = list()
@@ -110,9 +104,17 @@ class door_detection:
         xx.lower()
         yy = str(odom_y)
         yy.lower()
+        print(type(Z), str(Z))
+        #np.isnan(Z)
+        if Z==float("nan"):
+            print("methord 1")
+        if np.isnan(Z):
 
-        if yy.find('nan')!=-1:
             param = False
+            print("methord 2")
+        if yy.find('nan')!=-1:
+            print("methord 3")
+        
 
         return (odom_x,odom_y,odom_z,param)
 

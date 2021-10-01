@@ -34,7 +34,7 @@ def main(args):
     while rospy.get_param('aruco') == 0:
         rospy.sleep(0.005)
     #aruco.kill()
-    rospy.set_param('goal_point',[[1.4221,-1,0],[ 0, 0, 0.122839, 0.9924266 ]])
+    rospy.set_param('goal_point',[[1.4221,-1,0],[ 0, 0, 0.1048072, 0.9944926 ]])
     
     
     rospy.set_param('doors',0)
@@ -49,15 +49,15 @@ def main(args):
     rospy.set_param('map_down',0)
     while rospy.get_param('map_down')==0 :
         rospy.sleep(0.1)
-    for i in range(50):
-        print(1)
+    # for i in range(50):
+    #     print(1)
     # if (x>6.3) and (y>5.0) :
     path= os.path.abspath("map.pgm")
     print(path)
     mapp=subprocess.Popen(["rosrun", "map_server", "map_saver"])
-    rospy.sleep(2)
+    rospy.sleep(1)
     mapp.kill()
-    rospy.sleep(0.2)
+    rospy.sleep(0.1)
 
     counting=subprocess.Popen(["rosrun", "takshak", "balls.py"])
 
