@@ -20,7 +20,7 @@ def main(args):
     (thresh, img) = cv2.threshold(img, 195, 255, cv2.THRESH_BINARY)
     #edges = cv2.Canny(image=img, threshold1=100, threshold2=200)
 
-    _,countours,_=cv2.findContours(img,cv2.RETR_LIST,cv2.CHAIN_APPROX_NONE)
+    countours,_=cv2.findContours(img,cv2.RETR_LIST,cv2.CHAIN_APPROX_NONE)
 
     count_balls=0
     list=[]

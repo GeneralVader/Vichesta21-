@@ -81,7 +81,7 @@ TebLocalPlannerROS:
  # GoalTolerance
     
  xy_goal_tolerance: 0.2
- yaw_goal_tolerance: 0.05
+ yaw_goal_tolerance: 0.02
  free_goal_vel: False
     
  # Obstacles

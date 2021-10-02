@@ -7,34 +7,21 @@ import subprocess
 from nav_msgs.msg import Odometry
 import tf
 import os
-# def callback(msg):
-#     # while True:
-#     global x,y,orient
-#     x=msg.pose.pose.position.x
-#     y=msg.pose.pose.position.y
-#     orient = msg.pose.pose.orientation
-#     (roll,pitch,yaw) = tf.transformations.euler_from_quaternion([orient.x,orient.y,orient.z,orient.w])
-#     # if (x>6.3) and (y>5.0) :
-#     #     break
 
 
 def main(args):
     rospy.init_node("controller")
 
-    # odom_sub = rospy.Subscriber('/odom', Odometry,callback)
-    # print(odom_sub)
-    # for i in range(50):
-    #     print(1)
 
     #rospy.set_param('goal_point',[[-9.65,-2.7,0],[0,0,0.6051864,0.7960838]])
     rospy.set_param('aruco',0)
     rospy.set_param('gate_open',0)
     
-    #aruco=subprocess.Popen(["rosrun", "takshak", "aruco_detector.py"])
     while rospy.get_param('aruco') == 0:
         rospy.sleep(0.005)
     #aruco.kill()
-    rospy.set_param('goal_point',[[1.4221,-1,0],[ 0, 0, 0.1048072, 0.9944926 ]])
+    ###rospy.set_param('goal_point',[[1.4221,-1,0],[ 0, 0, 0.1494381, 0.9887711 ]])
+    rospy.set_param('goal_point',[[1.569,-0.66,0],[ 0, 0, 0.0998334, 0.9950042 ]])
     
     
     rospy.set_param('doors',0)
@@ -45,7 +32,8 @@ def main(args):
 
 
 
-    rospy.set_param('goal_point',[[6.5,6.5,0],[ 0, 0, 0.3662725, 0.9305076 ]])
+    #rospy.set_param('goal_point',[[6.9,6.5,0],[ 0, 0, 0.3662725, 0.9305076 ]])#42
+    rospy.set_param('goal_point',[[6.9,6.5,0],[ 0, 0, 0.3173047, 0.9483237 ]]) #37
     rospy.set_param('map_down',0)
     while rospy.get_param('map_down')==0 :
         rospy.sleep(0.1)
@@ -67,6 +55,8 @@ def main(args):
     
     goal_1 =rospy.get_param('gate')
     rospy.set_param('goal_point',goal_1)
+    
+
 
     try:
         rospy.spin()

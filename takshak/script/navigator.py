@@ -32,8 +32,9 @@ def goal_point(pos,ori):
 def main(args):
 
     rospy.init_node("navigator")
-    rospy.set_param('goal_point',[[-9.7,-4.1,0],[0,0,0.6051864,0.7960838]])
-    #rospy.set_param('goal_point',[[1.4221,-1,0],[ 0, 0, 0.1048072, 0.9944926 ]])
+    rospy.set_param('goal_point',[[-9.85,-3.32,0],[0,0,0.6051864,0.7960838]])
+    rospy.set_param('finish',0)
+    
     
     #rospy.set_param('goal_point',[[-9.7,-3.7,0],[0,0,0.6051864,0.7960838]])
     point= rospy.get_param('goal_point')
@@ -48,6 +49,8 @@ def main(args):
             point=rospy.get_param('goal_point')
             goal_point(point[0],point[1])
         rospy.sleep(0.01)
+        if rospy.get_param('finish')==1:
+            break
 
     try:
         rospy.spin()
