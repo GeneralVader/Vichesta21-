@@ -58,15 +58,15 @@ def main(args):
     id=count_balls%5
     # x =rospy.get_param('/door_id_'+str(id)+'/x')
     # x = max(7.5 ,min(8.5,x))
-    x=7.5
+    x=7.8
     y=rospy.get_param('/door_id_'+str(id)+'/y')
     rospy.set_param('gate',[[x,y,0],[0,0,0,1]])
     rospy.set_param('gate_open',1)
     #print(list)
 
-    cv2.imshow('map',image)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    # cv2.imshow('map',image)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
     try:
         rospy.spin()
     except KeyboardInterrupt:
