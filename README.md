@@ -20,6 +20,9 @@ https://user-images.githubusercontent.com/77744383/137580238-f181236f-7f73-4bd6-
 ## The Team
 
 Varad Vinayak Pandey
+
 Utkrisht Kumar Singh
+
 Vaibhav Tripathi
-Gujulla Leel Srini Rohan  
+
+Gujulla Leel Srini Rohan 
