@@ -21,7 +21,7 @@ https://user-images.githubusercontent.com/77744383/137580238-f181236f-7f73-4bd6-
 
 <table>
 
-	<td align="center">
+	<td align="left">
      <a href="https://github.com/jsparrow08">
     <img src="https://avatars.githubusercontent.com/u/77740824?v=4" width="100px;" alt=""/><br /><sub><b>Utkrisht Singh</b></sub></a><br />
 	</td>
