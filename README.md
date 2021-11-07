@@ -17,12 +17,27 @@ https://user-images.githubusercontent.com/77744383/137580238-f181236f-7f73-4bd6-
 
 
 
-## The Team
+## Contributor
 
-Varad Vinayak Pandey
+<table>
 
-Utkrisht Kumar Singh
+	<td align="center">
+     <a href="https://github.com/jsparrow08">
+    <img src="https://avatars.githubusercontent.com/u/77740824?v=4" width="100px;" alt=""/><br /><sub><b>Utkrisht Singh</b></sub></a><br />
+	</td>
+  <td align="center">
+     <a href="https://github.com/GeneralVader">
+    <img src="https://avatars.githubusercontent.com/u/77744383?v=4" width="100px;" alt=""/><br /><sub><b>Varad vinayak Pandey</b></sub></a><br />
+	</td>
+  
+  <td align="center">
+     <a href="https://github.com/Srini-Rohan">
+    <img src="https://avatars.githubusercontent.com/u/76437900?v=4" width="100px;" alt=""/><br /><sub><b>Srini Rohan</b></sub></a><br />
+	</td>
+  <td align="center">
+     <a href="https://github.com/oyetripathi">
+    <img src="https://avatars.githubusercontent.com/u/88205739?v=4" width="100px;" alt=""/><br /><sub><b>Vaibhav Tirpathi</b></sub></a><br />
+	</td>
 
-Vaibhav Tripathi
 
-Gujulla Leel Srini Rohan 
+</table>
