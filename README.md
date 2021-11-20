@@ -20,15 +20,15 @@ https://user-images.githubusercontent.com/77744383/137580238-f181236f-7f73-4bd6-
 ## Contributor
 
 <table>
+	
  <td align="center">
-     <a href="https://github.com/jsparrow08">
-    <img src="https://avatars.githubusercontent.com/u/77740824?v=4" width="100px;" alt=""/><br /><sub><b>Utkrisht Kumar Singh</b></sub></a><br />
-    </td>
-  <td align="center">
      <a href="https://github.com/GeneralVader">
     <img src="https://avatars.githubusercontent.com/u/77744383?v=4" width="100px;" alt=""/><br /><sub><b>Varad vinayak Pandey</b></sub></a><br />
 	</td>
-  
+ <td align="center">
+     <a href="https://github.com/jsparrow08">
+    <img src="https://avatars.githubusercontent.com/u/77740824?v=4" width="100px;" alt=""/><br /><sub><b>Utkrisht Kumar Singh</b></sub></a><br />
+    </td>  
   <td align="center">
      <a href="https://github.com/Srini-Rohan">
     <img src="https://avatars.githubusercontent.com/u/76437900?v=4" width="100px;" alt=""/><br /><sub><b>Srini Rohan</b></sub></a><br />
